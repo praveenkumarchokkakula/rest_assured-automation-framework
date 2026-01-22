@@ -11,11 +11,15 @@ import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.empty;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.StringJoiner;
 
 import com.restfulbooker.apitest.actions.HttpOperation;
 import com.restfulbooker.apitest.actions.ValidatorOperation;
 import com.restfulbooker.apitest.interfaces.IApi;
 import com.restfulbooker.apitest.utilities.Helper;
+import com.restfulbooker.apitest.listeners.ExtentTestManager;
 
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
@@ -23,6 +27,7 @@ import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
+import com.relevantcodes.extentreports.LogStatus;
 import static org.hamcrest.Matchers.anyOf;
 
 
@@ -33,6 +38,12 @@ public class API implements IApi {
 	String url;
 	Response resp;
 	
+	// new fields to capture request details for reporting
+	private String lastRequestBody = "";
+	private Map<String, String> lastRequestHeaders = new HashMap<>();
+	private Map<String, String> lastQueryParams = new HashMap<>();
+	private Map<String, String> lastFormParams = new HashMap<>();
+
     public void init(String url, HttpOperation method) {
 		this.url = url;
 		this.method = method;
@@ -54,34 +65,117 @@ public class API implements IApi {
 		for (int row = 0; row < head.length; row++)
 			for (int col = 0; col < head[row].length; col++)
 				reqSpec.header(head[row][col], head[row][col + 1]);
+		// also record in map
+		for (int row = 0; row < head.length; row++) {
+			String k = head[row][0];
+			String v = head[row][1];
+			lastRequestHeaders.put(k, v);
+		}
 	}
 
-	public void setHeader(String head, String val) { reqSpec.header(head, val);}
+	public void setHeader(String head, String val) {
+		reqSpec.header(head, val);
+		lastRequestHeaders.put(head, val);
+	}
 
-	public void setBody(String body) { reqSpec.body(body); }
+	public void setBody(String body) { reqSpec.body(body); lastRequestBody = body; }
 
-	public void setFormParam(String key, String val) { reqSpec.formParam(key, val);}
+	public void setFormParam(String key, String val) { reqSpec.formParam(key, val); lastFormParams.put(key, val);}
 
-	public void setQueryParam(String key, String val) { reqSpec.queryParam(key, val);}
+	public void setQueryParam(String key, String val) { reqSpec.queryParam(key, val); lastQueryParams.put(key, val);}
 
 	public String callIt() {
 		if (method.toString().equalsIgnoreCase("get")) {
 			resp = reqSpec.get(url);
+			logRequestResponseToExtent();
 			return resp.asString();
 		} else if (method.toString().equalsIgnoreCase("post")) {
 			resp = reqSpec.post(url);
+			logRequestResponseToExtent();
 			return resp.asString();
 		} else if (method.toString().equalsIgnoreCase("patch")) {
 			resp = reqSpec.patch(url);
+			logRequestResponseToExtent();
 			return resp.asString();
 		} else if (method.toString().equalsIgnoreCase("put")) {
 			resp = reqSpec.put(url);
+			logRequestResponseToExtent();
 			return resp.asString();
 		} else if (method.toString().equalsIgnoreCase("delete")) {
 			resp = reqSpec.delete(url);
+			logRequestResponseToExtent();
 			return resp.asString();
 		}
 		return "invalid method set for API";
+	}
+
+	/**
+	 * Log request and response details into Extent report (if a test is active)
+	 */
+	private void logRequestResponseToExtent() {
+		try {
+			if (ExtentTestManager.getTest() == null) return;
+			StringBuilder sb = new StringBuilder();
+			// Host
+			sb.append("<b>Host:</b> ").append(RestAssured.baseURI == null ? "(not set)" : RestAssured.baseURI).append("<br/>");
+			// Request line
+			String fullUrl = (RestAssured.baseURI == null ? "" : RestAssured.baseURI) + url;
+			if (!lastQueryParams.isEmpty()) {
+				StringJoiner q = new StringJoiner("&","?","");
+				for (Map.Entry<String,String> e : lastQueryParams.entrySet()) q.add(e.getKey()+"="+e.getValue());
+				fullUrl += q.toString();
+			}
+			sb.append("<b>Request:</b> ").append(method == null ? "" : method.toString().toUpperCase()).append(" ").append(fullUrl).append("<br/>");
+			// Headers
+			if (!lastRequestHeaders.isEmpty()) {
+				sb.append("<b>Request Headers:</b><br/><pre>");
+				for (Map.Entry<String,String> e : lastRequestHeaders.entrySet()) {
+					sb.append(e.getKey()).append(": ").append(e.getValue()).append("\n");
+				}
+				sb.append("</pre>");
+			}
+			// Form params
+			if (!lastFormParams.isEmpty()) {
+				sb.append("<b>Form Params:</b><br/><pre>");
+				for (Map.Entry<String,String> e : lastFormParams.entrySet()) {
+					sb.append(e.getKey()).append(": ").append(e.getValue()).append("\n");
+				}
+				sb.append("</pre>");
+			}
+			// Body
+			if (lastRequestBody != null && !lastRequestBody.isEmpty()) {
+				sb.append("<b>Request Body:</b><br/><pre>");
+				sb.append(escapeHtml(lastRequestBody)).append("</pre>");
+			}
+			// Response status
+			sb.append("<b>Response Code:</b> ").append(resp == null ? "(no response)" : resp.getStatusCode()).append("<br/>");
+			// Response headers
+			if (resp != null) {
+				Headers rh = resp.getHeaders();
+				if (rh != null && rh.size() > 0) {
+					sb.append("<b>Response Headers:</b><br/><pre>");
+					for (Header h : rh) {
+						sb.append(h.getName()).append(": ").append(h.getValue()).append("\n");
+					}
+					sb.append("</pre>");
+				}
+				// Response body
+				String body = resp.asString();
+				if (body != null && !body.isEmpty()) {
+					sb.append("<b>Response Body:</b><br/><pre>");
+					sb.append(escapeHtml(body)).append("</pre>");
+				}
+			}
+			ExtentTestManager.getTest().log(LogStatus.INFO, sb.toString());
+		} catch (Exception e) {
+			// don't let reporting break tests
+			e.printStackTrace();
+		}
+	}
+
+	private String escapeHtml(String s) {
+		if (s == null) return "";
+		return s.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;");
 	}
 
 	public API assertIt(String key, Object val, ValidatorOperation operation) {

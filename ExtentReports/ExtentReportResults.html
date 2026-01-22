@@ -24,10 +24,10 @@
 		
 		<style>
 				
-      
+            
+                
+            
         
-      
-    
 		</style>
 	</head>
 	
@@ -47,13 +47,13 @@
 					<a href='#!' onclick="_updateCurrentStage(-1)" class='dashboard-view'><i class='mdi-action-track-changes'></i></i>Analysis</a>
 				</li>
 			</ul>
-			<span class='report-name'>API Automation Report</span> <span class='report-headline'>API Automation Report</span>
+			<span class='report-name'>Automation Report</span> <span class='report-headline'></span>
 			<ul class='right hide-on-med-and-down nav-right'>
 				<li class='theme-selector' alt='Click to toggle dark theme. To enable by default, use js configuration $("body").addClass("dark");' title='Click to toggle dark theme. To enable by default, use js configuration $("body").addClass("dark");'>
 					<i class='mdi-hardware-desktop-windows'></i>
 				</li>
 				<li>
-					<span class='suite-started-time'>2020-05-31 18:36:09</span>
+					<span class='suite-started-time'>2026-01-22 11:47:42</span>
 				</li>
 				<li>
 					<span>v2.41.1</span>
@@ -83,25 +83,25 @@
 					<div class='col l2 m4 s12'>
 						<div class='card suite-total-time-current'> 
 							<span class='panel-name'>Total Time Taken (Current Run)</span> 
-							<span class='suite-total-time-current-value panel-lead'>0h 0m 7s+52ms</span> 
+							<span class='suite-total-time-current-value panel-lead'>0h 0m 9s+10ms</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s12'>
 						<div class='card suite-total-time-overall'> 
 							<span class='panel-name'>Total Time Taken (Overall)</span> 
-							<span class='suite-total-time-overall-value panel-lead'>0h 0m 7s+52ms</span> 
+							<span class='suite-total-time-overall-value panel-lead'>0h 0m 9s+10ms</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s6 suite-start-time'>
 						<div class='card accent green-accent'> 
 							<span class='panel-name'>Start</span> 
-							<span class='panel-lead suite-started-time'>2020-05-31 18:36:02</span> 
+							<span class='panel-lead suite-started-time'>2026-01-22 11:47:33</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s6 suite-end-time'>
 						<div class='card accent pink-accent'> 
 							<span class='panel-name'>End</span> 
-							<span class='panel-lead suite-ended-time'>2020-05-31 18:36:09</span> 
+							<span class='panel-lead suite-ended-time'>2026-01-22 11:47:42</span> 
 						</div> 
 					</div>
 				</div>
@@ -168,19 +168,19 @@
 								<tbody>
 										<tr>
 											<td>User Name</td>
-											<td>apple</td>
+											<td>chokk</td>
 										</tr>
 										<tr>
 											<td>OS</td>
-											<td>Mac OS X</td>
+											<td>Windows 11</td>
 										</tr>
 										<tr>
 											<td>Java Version</td>
-											<td>1.8.0_151</td>
+											<td>11.0.28</td>
 										</tr>
 										<tr>
 											<td>Host Name</td>
-											<td>Abus-MacBook-Pro.local</td>
+											<td>Naidus-laptop</td>
 										</tr>
 								</tbody>
 							</table>
@@ -237,15 +237,15 @@
 						<div class='card-panel no-padding-h no-padding-v no-margin-v'>
 							<div class='wrapper'>
 								<ul id='test-collection' class='test-collection'>
-										<li class='collection-item test displayed active fail ' extentid='aeb3208b-b3e5-4224-8db7-6c2044529524'>
+										<li class='collection-item test displayed active pass ' extentid='57e63b8e-2166-4184-8c3c-d00f9fdf19c3'>
 											<div class='test-head'>
 												<span class='test-name'>invalidLoginTest </span>
-												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
 												<span class='category-assigned hide '></span>
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-05-31 18:36:02</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2026-01-22 11:47:33</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -263,14 +263,34 @@
 														</thead>
 														<tbody>
 																<tr>
-																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
-																	<td class='timestamp'>18:36:07</td>
-																	<td class='step-details'>Assertion Failure: 1 expectation failed.
-Expected status code <200> but was <503>.</td>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>11:47:39</td>
+																	<td class='step-details'><b>Host:</b> https://restful-booker.herokuapp.com<br/><b>Request:</b> POST https://restful-booker.herokuapp.com/auth<br/><b>Request Headers:</b><br/><pre>Content-Type: application/json
+</pre><b>Request Body:</b><br/><pre>{ "username" : "dummy", "password" : "dummypassword123"}</pre><b>Response Code:</b> 200<br/><b>Response Headers:</b><br/><pre>Content-Length: 28
+Content-Type: application/json; charset=utf-8
+Date: Thu, 22 Jan 2026 06:17:39 GMT
+Etag: W/"1c-J3EiwfZwVQjKTKvpvazUfTni8fI"
+Nel: {"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}
+Report-To: {"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=HtgzqHYR3ShfvFa2T5DUBnUtOryUZNOzLi0gTz3FN3g%3D\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\u0026ts=1769062659"}],"max_age":3600}
+Reporting-Endpoints: heroku-nel="https://nel.heroku.com/reports?s=HtgzqHYR3ShfvFa2T5DUBnUtOryUZNOzLi0gTz3FN3g%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1769062659"
+Server: Heroku
+Via: 1.1 heroku-router
+X-Powered-By: Express
+</pre><b>Response Body:</b><br/><pre>{"reason":"Bad credentials"}</pre></td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>11:47:39</td>
+																	<td class='step-details'>Asserting response code</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>11:47:40</td>
+																	<td class='step-details'>Asserting response value == Bad credentials</td>
 																</tr>
 																<tr>
 																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
-																	<td class='timestamp'>18:36:07</td>
+																	<td class='timestamp'>11:47:40</td>
 																	<td class='step-details'>Test passed</td>
 																</tr>
 														</tbody>
@@ -280,17 +300,17 @@ Expected status code <200> but was <503>.</td>
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active fail ' extentid='3b8ad5f7-48d7-4088-9128-062466bd7f9f'>
+										<li class='collection-item test displayed active pass ' extentid='2cfc5e8a-0b72-493b-ab5e-93f3f6170c02'>
 											<div class='test-head'>
 												<span class='test-name'>validLoginTest </span>
-												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
 												<span class='category-assigned hide '></span>
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-05-31 18:36:07</span>
-													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-05-31 18:36:09</span>
-													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 1s+659ms</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2026-01-22 11:47:40</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2026-01-22 11:47:41</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 1s+512ms</span>
 												</div>
 												<div class='test-desc'>Description: Valid Login Scenario with username and password.</div>
 												<div class='test-attributes'>
@@ -306,14 +326,39 @@ Expected status code <200> but was <503>.</td>
 														</thead>
 														<tbody>
 																<tr>
-																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
-																	<td class='timestamp'>18:36:09</td>
-																	<td class='step-details'>Assertion Failure: 1 expectation failed.
-Expected status code <200> but was <503>.</td>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>11:47:41</td>
+																	<td class='step-details'><b>Host:</b> https://restful-booker.herokuapp.com<br/><b>Request:</b> POST https://restful-booker.herokuapp.com/auth<br/><b>Request Headers:</b><br/><pre>Content-Type: application/json
+</pre><b>Request Body:</b><br/><pre>{ "username" : "admin", "password" : "password123"}</pre><b>Response Code:</b> 200<br/><b>Response Headers:</b><br/><pre>Content-Length: 27
+Content-Type: application/json; charset=utf-8
+Date: Thu, 22 Jan 2026 06:17:41 GMT
+Etag: W/"1b-we0um9BBnTL8FdRFvyJ79UPwXgs"
+Nel: {"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}
+Report-To: {"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=2FTAgAj9LCKasjbQ4nswkk%2FA2UQUKSCschrPJlC80dI%3D\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\u0026ts=1769062661"}],"max_age":3600}
+Reporting-Endpoints: heroku-nel="https://nel.heroku.com/reports?s=2FTAgAj9LCKasjbQ4nswkk%2FA2UQUKSCschrPJlC80dI%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1769062661"
+Server: Heroku
+Via: 1.1 heroku-router
+X-Powered-By: Express
+</pre><b>Response Body:</b><br/><pre>{"token":"61ec38166e24d9b"}</pre></td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>11:47:41</td>
+																	<td class='step-details'>Asserting response code</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>11:47:41</td>
+																	<td class='step-details'>Asserting response value not empty case</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>11:47:41</td>
+																	<td class='step-details'>Asserting response value not null case</td>
 																</tr>
 																<tr>
 																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
-																	<td class='timestamp'>18:36:09</td>
+																	<td class='timestamp'>11:47:41</td>
 																	<td class='step-details'>Test passed</td>
 																</tr>
 														</tbody>
@@ -420,12 +465,12 @@ Expected status code <200> but was <503>.</td>
 		<script>$(document).ready(function() { $('.logo span').html('ExtentReports'); });</script>
 		<script>
 				
-      
-        $(document).ready(function() {
-          
-        });
-      
-    
+            
+                $(document).ready(function() {
+                    
+                });
+            
+        
 		</script>
 	</body>
 </html>

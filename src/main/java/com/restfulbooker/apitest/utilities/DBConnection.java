@@ -1,6 +1,5 @@
 package com.restfulbooker.apitest.utilities;
 
-import com.mysql.*;
 import java.sql.*;
 import java.sql.DriverManager;
 import java.util.concurrent.Executors;
@@ -15,7 +14,7 @@ public final class DBConnection {
     private DBConnection() {
         String url= getProperties("DBUrl");
         String dbName = getProperties("DBName");
-        String driver = "com.mysql.jdbc.Driver";
+        String driver = "com.mysql.cj.jdbc.Driver";
         String userName = getProperties("DBUserName");
         String password = getProperties("DBPassWord");
         
